@@ -1,0 +1,57 @@
+[
+  {
+    "fichero": "fotos/hero.jpg",
+    "aspecto": "21:9",
+    "prompt": "Banco de reparación de móviles visto en plano medio y algo picado: alfombrilla antiestática negra, un smartphone abierto con la pantalla separada, destornilladores de precisión, pinzas y un microscopio de taller; fondo oscuro de tienda con luz fría lateral y reflejos verdes suaves, poca profundidad de campo, sin personas, sin texto legible ni logotipos"
+  },
+  {
+    "fichero": "fotos/proceso-1.jpg",
+    "aspecto": "4:3",
+    "prompt": "Primer plano de las puntas de un multímetro midiendo una batería de móvil sobre alfombrilla antiestática negra, luz fría de lámpara de taller, fondo muy oscuro desenfocado, sin manos reconocibles, sin texto legible ni logotipos"
+  },
+  {
+    "fichero": "fotos/proceso-2.jpg",
+    "aspecto": "4:3",
+    "prompt": "Macro de una placa base de smartphone bajo el aro de luz de un microscopio, componentes diminutos y pistas doradas, tonos negros y verdosos, enfoque nítido en el centro, sin texto legible ni logotipos"
+  },
+  {
+    "fichero": "fotos/proceso-3.jpg",
+    "aspecto": "4:3",
+    "prompt": "Smartphone con pantalla nueva encendida en color liso, apoyado sobre una base de silicona negra junto a herramientas ordenadas, luz suave de estudio, fondo oscuro, sin iconos ni texto en la pantalla, sin logotipos"
+  },
+  {
+    "fichero": "fotos/garantias.jpg",
+    "aspecto": "3:4",
+    "prompt": "Mesa de trabajo de un servicio técnico en vertical: estación de soldadura, lupa con aro de luz, cajitas de piezas etiquetadas sin texto legible y un portátil abierto con la carcasa inferior quitada; ambiente limpio de laboratorio, luz fría y fondo gris oscuro, sin personas ni logotipos"
+  },
+  {
+    "fichero": "fotos/producto-1.jpg",
+    "aspecto": "1:1",
+    "prompt": "Smartphone reacondicionado de gama alta visto por detrás, color grafito, sobre fondo gris claro liso con sombra suave, foto de producto de estudio, sin logotipos ni texto"
+  },
+  {
+    "fichero": "fotos/producto-2.jpg",
+    "aspecto": "1:1",
+    "prompt": "Portátil plateado de 14 pulgadas medio abierto con la pantalla apagada, sobre fondo gris claro liso con sombra suave, foto de producto de estudio, sin logotipos ni texto"
+  },
+  {
+    "fichero": "fotos/producto-3.jpg",
+    "aspecto": "1:1",
+    "prompt": "Funda antigolpes negra para móvil y un cristal templado transparente colocados juntos sobre fondo gris claro liso, foto de producto de estudio con luz suave, sin logotipos ni texto"
+  },
+  {
+    "fichero": "fotos/producto-4.jpg",
+    "aspecto": "1:1",
+    "prompt": "Cargador de pared blanco compacto con un cable trenzado negro enrollado, sobre fondo gris claro liso, foto de producto de estudio con sombra suave, sin logotipos ni texto"
+  },
+  {
+    "fichero": "fotos/presupuesto.jpg",
+    "aspecto": "4:3",
+    "prompt": "Mostrador de una tienda de reparación de móviles: superficie negra con varios móviles y una tablet en bandejas, vitrina iluminada con fundas de colores al fondo desenfocada, luz fría y acentos verdes, sin personas, sin texto legible ni logotipos"
+  },
+  {
+    "fichero": "fotos/contacto.jpg",
+    "aspecto": "4:3",
+    "prompt": "Fachada de una pequeña tienda de tecnología en una calle peatonal mediterránea al atardecer, escaparate de cristal iluminado con luz blanca y verde, toldo oscuro, aceras de piedra clara, sin personas, sin rótulos legibles ni logotipos"
+  }
+]

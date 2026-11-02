@@ -1,0 +1,116 @@
+---
+// Reparaciones: banda clara a todo el ancho con rejilla de puntos tenue. Cabecera partida (titular a la izquierda,
+// `nota` y `cta` a la derecha) y, debajo, una tabla técnica en dos columnas (escritorio ancho) con
+// `reparaciones: [{nombre, texto, precio, tiempo, dispositivo}]`: etiqueta del aparato con su icono, nombre,
+// texto, tiempo y precio en monoespaciada. Si hay más de un aparato, filtros sin JavaScript (radios + :has).
+// Sin precio no sale precio; sin tiempo no sale tiempo; sin reparaciones solo se pinta el titular.
+import { seccion, clave } from '../../data/site';
+import Icono from '../ui/Icono.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const filas = s ? s.reparaciones : [];
+const aparatos = [...new Map(filas.filter((r) => r.dispositivo).map((r) => [clave(r.dispositivo), String(r.dispositivo)])).entries()];
+const conFiltros = aparatos.length > 1;
+const ICONOS: Record<string, string> = { movil: 'movil', tablet: 'tablet', portatil: 'portatil', ordenador: 'portatil', consola: 'consola' };
+const icono = (d?: string) => ICONOS[clave(d)] ?? 'chip';
+// Una regla por aparato: con su radio marcado, se ocultan las filas de los demás.
+const css = conFiltros
+  ? aparatos.map(([k]) => `#${id}:has(#${id}-f-${k}:checked) .rep-fila:not([data-d="${k}"]){display:none}`).join('')
+  : '';
+---
+
+{
+  s && (
+    <section id={id} class="banda-clara puntos-claros seccion">
+      {css && <style set:html={css} />}
+      <div class="contenedor">
+        <div class="rep-cabecera">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {(s.nota || s.cta) && (
+            <div class="rep-lateral">
+              {s.nota && (
+                <p class="rep-nota">
+                  <Icono nombre="check" tam={20} class="shrink-0 text-acento" />
+                  <span>{s.nota}</span>
+                </p>
+              )}
+              {s.cta && <a class="btn btn-negro" href={s.cta.url}>{s.cta.texto}</a>}
+            </div>
+          )}
+        </div>
+
+        {conFiltros && (
+          <fieldset class="rep-filtros">
+            <legend class="solo-lector">Filtrar por aparato</legend>
+            <label class="rep-filtro">
+              <input class="solo-lector" type="radio" name={`${id}-filtro`} id={`${id}-f-todo`} checked />
+              Todo
+            </label>
+            {aparatos.map(([k, nombre]) => (
+              <label class="rep-filtro">
+                <input class="solo-lector" type="radio" name={`${id}-filtro`} id={`${id}-f-${k}`} />
+                <Icono nombre={icono(nombre)} tam={16} />
+                {nombre}
+              </label>
+            ))}
+          </fieldset>
+        )}
+
+        {filas.length > 0 && (
+          <ul class="rep-lista">
+            {filas.map((r) => (
+              <li class="rep-fila" data-d={clave(r.dispositivo)}>
+                <div class="rep-meta">
+                  {r.dispositivo && (
+                    <span class="chip rep-aparato">
+                      <Icono nombre={icono(r.dispositivo)} tam={14} />
+                      {r.dispositivo}
+                    </span>
+                  )}
+                  {r.tiempo && (
+                    <span class="rep-tiempo">
+                      <Icono nombre="reloj" tam={14} />
+                      {r.tiempo}
+                    </span>
+                  )}
+                </div>
+                <div class="rep-cuerpo">
+                  <h3 class="rep-nombre">{r.nombre}</h3>
+                  {r.texto && <p class="rep-texto">{r.texto}</p>}
+                </div>
+                {r.precio && <p class="rep-precio num">{r.precio}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .rep-cabecera { display: grid; gap: 2rem; margin-bottom: 3rem; }
+  @media (min-width: 1024px) { .rep-cabecera { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; gap: 5rem; } }
+  .rep-lateral { display: grid; gap: 1.25rem; justify-items: start; }
+  .rep-nota { display: flex; gap: .6rem; align-items: flex-start; font-weight: 600; }
+  .rep-filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; border: 0; padding: 0; }
+  .rep-filtro { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; padding-inline: 1rem; font-family: var(--fuente-mono); font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; border: 1px solid var(--linea); border-radius: var(--radio); background: var(--panel); cursor: pointer; }
+  .rep-filtro:hover { border-color: var(--c-texto); }
+  .rep-filtro:has(input:checked) { background: var(--c-texto); color: var(--c-primario); border-color: var(--c-texto); }
+  .rep-filtro:has(input:focus-visible) { outline: 2px solid var(--c-acento); outline-offset: 2px; }
+  .rep-lista { display: grid; column-gap: 3rem; }
+  @media (min-width: 1200px) { .rep-lista { grid-template-columns: 1fr 1fr; } }
+  .rep-fila { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1.5rem; align-items: start; padding: 1.4rem 1rem 1.4rem 1.1rem; margin-inline: -1rem; border-top: 1px solid var(--linea); transition: background-color .15s ease; }
+  .rep-fila::before { content: ""; position: absolute; left: 0; top: 1.4rem; bottom: 1.4rem; width: 3px; border-radius: 2px; background: transparent; }
+  .rep-fila:hover { background: var(--panel); }
+  .rep-fila:hover::before { background: var(--c-primario); }
+  .rep-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+  .rep-aparato { color: var(--c-acento); }
+  .rep-tiempo { display: inline-flex; align-items: center; gap: .35rem; font-family: var(--fuente-mono); font-size: .78rem; opacity: .75; }
+  .rep-nombre { font-size: clamp(1.25rem, 2.2vw, 1.5rem); letter-spacing: -0.03em; line-height: 1.15; }
+  .rep-texto { margin-top: .3rem; font-size: .97rem; opacity: .75; }
+  .rep-precio { font-size: clamp(1.15rem, 2vw, 1.4rem); white-space: nowrap; text-align: right; padding-top: .1rem; }
+  @media (max-width: 479px) { .rep-fila { grid-template-columns: 1fr; } .rep-precio { text-align: left; } }
+</style>

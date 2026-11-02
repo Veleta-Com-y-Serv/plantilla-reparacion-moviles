@@ -1,0 +1,58 @@
+---
+// Opiniones: banda negra a todo el ancho. La primera opinión, como cita grande que ocupa el contenedor; las demás,
+// debajo en columnas (2 en tableta, 3 en escritorio) con filete superior y comillas monoespaciadas en verde
+// (`testimonios: [{texto, autor, nota}]`). Sin opiniones, solo el titular. No inventes opiniones.
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const lista = s ? s.testimonios.filter((t) => t && t.texto) : [];
+const [primera, ...resto] = lista;
+---
+
+{
+  s && (
+    <section id={id} class="banda-negra seccion">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {primera && (
+          <figure class="op-grande">
+            <span class="op-comillas" aria-hidden="true">“</span>
+            <blockquote>{primera.texto}</blockquote>
+            <figcaption class="op-autor">
+              <span class="text-primario">{primera.autor}</span>
+              {primera.nota && <span class="opacity-70"> / {primera.nota}</span>}
+            </figcaption>
+          </figure>
+        )}
+        {resto.length > 0 && (
+          <ul class="op-resto">
+            {resto.map((t) => (
+              <li>
+                <figure>
+                  <blockquote class="text-lg opacity-90">{t.texto}</blockquote>
+                  <figcaption class="op-autor mt-5">
+                    <span class="text-primario">{t.autor}</span>
+                    {t.nota && <span class="opacity-70"> / {t.nota}</span>}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .op-grande { position: relative; padding: 2rem 0 3rem; border-top: 1px solid var(--linea-oscura); }
+  .op-comillas { display: block; font-family: var(--fuente-mono); font-size: clamp(4rem, 12vw, 8rem); line-height: .7; color: var(--c-primario); }
+  .op-grande blockquote { margin-top: 1rem; max-width: 34ch; font-family: var(--fuente-titulos); font-weight: 700; font-size: clamp(1.6rem, 4.2vw, 3.25rem); letter-spacing: -0.035em; line-height: 1.12; }
+  .op-autor { display: block; margin-top: 1.75rem; font-family: var(--fuente-mono); font-size: .82rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .op-resto { display: grid; gap: 2rem 3rem; }
+  @media (min-width: 768px) { .op-resto { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1200px) { .op-resto { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .op-resto li { padding-top: 1.75rem; border-top: 2px solid var(--c-primario); }
+</style>

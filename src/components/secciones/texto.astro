@@ -1,0 +1,63 @@
+---
+// Apartado de texto genérico (apartados nuevos del cliente: `tipo: texto`). Banda clara a todo el ancho.
+// Con `imagen`: fila partida 50/50 con la foto a sangre a la derecha. Sin imagen: título a la izquierda y
+// párrafos a la derecha. Opcionales: `items: [{titulo, texto, icono}]` (con icono en chip negro) y `cta`.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-clara">
+      <div class:list={['partida', s.imagen ? 'partida--md' : 'texto--sin-foto']}>
+        <div class:list={['partida-texto', s.imagen ? 'partida-texto--izq' : 'contenedor texto-rejilla']}>
+          <div>
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          </div>
+          <div>
+            {parrafos(s.texto).length > 0 && (
+              <div class:list={['space-y-4 text-lg opacity-85', { 'mt-7': s.imagen }]}>
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {items.length > 0 && (
+              <ul class="texto-items">
+                {items.map((it) => (
+                  <li>
+                    <span class="texto-icono"><Icono nombre={it.icono} tam={18} /></span>
+                    <div>
+                      <p class="text-lg font-bold tracking-tight">{it.titulo}</p>
+                      {it.texto && <p class="text-[.95rem] opacity-75">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} />
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .texto--sin-foto { grid-template-columns: 1fr !important; }
+  .texto-rejilla { display: grid; gap: 2rem; }
+  @media (min-width: 1024px) { .texto-rejilla { grid-template-columns: 1fr 1.3fr; gap: 5rem; } }
+  .texto-items { display: grid; gap: 1.25rem 2rem; margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--linea); }
+  @media (min-width: 640px) { .texto-items { grid-template-columns: 1fr 1fr; } }
+  .texto-items li { display: flex; gap: .85rem; }
+  .texto-icono { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; flex-shrink: 0; border-radius: var(--radio); background: var(--c-texto); color: var(--c-primario); }
+</style>

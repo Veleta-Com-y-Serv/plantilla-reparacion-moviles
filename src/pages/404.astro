@@ -1,0 +1,24 @@
+---
+// Página no encontrada con el diseño de la tienda: banda negra con rejilla de puntos, «404» enorme en verde
+// monoespaciado con cursor, como un error de terminal.
+import Base from '../layouts/Base.astro';
+import { site, tel } from '../data/site';
+const telefono = site.contacto.telefono;
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda-negra puntos relative isolate overflow-hidden">
+    <div class="contenedor grid min-h-[70svh] content-center gap-8 py-20 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div>
+        <p class="antetitulo">Error 404</p>
+        <h1 class="titulo-seccion">Esta página no responde</h1>
+        <p class="mt-5 max-w-xl text-lg opacity-80">Puede que el enlace esté mal o que la página se haya movido. Vuelve al inicio o llámanos.</p>
+        <p class="mt-9 flex flex-wrap gap-3">
+          <a class="btn" href="/">Volver al inicio</a>
+          {telefono && <a class="btn-sec" href={tel(telefono)}>{telefono}</a>}
+        </p>
+      </div>
+      <p class="num text-[clamp(6rem,34vw,18rem)] leading-[.8] text-primario" aria-hidden="true">404<span class="cursor" /></p>
+    </div>
+  </section>
+</Base>

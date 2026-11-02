@@ -1,0 +1,35 @@
+---
+// Marcas: banda negra a todo el ancho con rejilla de puntos. Titular a la izquierda y, ocupando todo el
+// contenedor, un teclado de «teclas» con los nombres (`items: [{titulo}]`, solo texto, nunca logotipos):
+// 2 columnas en móvil, 3 en tableta y 6 en escritorio. **No se pinta si `items` está vacío.**
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const marcas = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && marcas.length > 0 && (
+    <section id={id} class="banda-negra puntos seccion">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <ul class="teclas">
+          {marcas.map((m) => (
+            <li class="tecla">{m.titulo}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .teclas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+  @media (min-width: 640px) { .teclas { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .teclas { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .75rem; } }
+  .tecla { display: grid; place-items: center; min-height: 5.5rem; padding: 1rem .75rem; text-align: center; font-family: var(--fuente-titulos); font-weight: 800; font-size: clamp(1.05rem, 2.2vw, 1.4rem); letter-spacing: -0.03em; line-height: 1.1; border: 1px solid var(--linea-oscura); border-bottom-width: 3px; border-radius: var(--radio); background: color-mix(in srgb, var(--c-fondo) 4%, transparent); transition: border-color .15s ease, box-shadow .15s ease, color .15s ease; overflow-wrap: anywhere; }
+  .tecla:hover { border-color: var(--c-primario); color: var(--c-primario); box-shadow: 0 0 24px color-mix(in srgb, var(--c-primario) 18%, transparent); }
+  @media (min-width: 1024px) { .tecla { min-height: 7rem; } }
+</style>

@@ -1,0 +1,112 @@
+---
+// Portada a pantalla (casi) completa: foto del banco de reparación a sangre con velo negro desde la izquierda y
+// rejilla de puntos verde a la derecha. Antetítulo «//», título enorme con la última palabra en verde y un cursor
+// que parpadea, `texto` y dos botones (`cta` = presupuesto, `cta_secundario` = llamar con «tel:»). A la derecha
+// (escritorio), una consola con los datos de site.yaml → contacto (solo lo que haya). Abajo, una tira con los
+// aparatos que se reparan (los `dispositivo` de la sección de reparaciones). Sin foto, negro con puntos.
+import { seccion, site, tel, dispositivos } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const esTel = (u?: string) => Boolean(u && u.startsWith('tel:'));
+const palabras = (s?.titulo ?? '').trim().split(/\s+/).filter(Boolean);
+const ultima = palabras.pop() ?? '';
+const lineas = [
+  c.telefono && { clave: 'tel', valor: c.telefono, url: tel(c.telefono) },
+  c.whatsapp && { clave: 'whatsapp', valor: c.whatsapp, url: '' },
+  c.horario && { clave: 'horario', valor: c.horario, url: '' },
+  c.direccion && { clave: 'dónde', valor: c.direccion, url: '' },
+].filter(Boolean) as { clave: string; valor: string; url: string }[];
+const aparatos = dispositivos();
+---
+
+{
+  s && (
+    <section id={id} class:list={['hero banda-negra relative isolate flex flex-col overflow-hidden', { puntos: !s.imagen }]}>
+      {s.imagen && (
+        <Imagen src={s.imagen} alt={altHero()} ancho={1920} alto={1080} prioridad={primera} class="absolute inset-0 -z-20 h-full w-full object-cover" />
+      )}
+      <div class="hero-velo absolute inset-0 -z-10" aria-hidden="true" />
+      <div class="hero-puntos puntos absolute inset-y-0 right-0 -z-10" aria-hidden="true" />
+      <div class="contenedor hero-rejilla flex-1">
+        <div class="hero-texto">
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {palabras.length + (ultima ? 1 : 0) > 0 && (
+            <h1 class="hero-titulo">
+              {palabras.length > 0 && `${palabras.join(' ')} `}<span class="text-primario">{ultima}</span><span class="cursor" aria-hidden="true" />
+            </h1>
+          )}
+          {s.texto && <p class="mt-6 max-w-2xl text-lg opacity-85 md:text-xl">{s.texto}</p>}
+          {(s.cta || s.cta_secundario) && (
+            <div class="mt-9 flex flex-wrap gap-3">
+              {s.cta && <a class="btn" href={s.cta.url}>{s.cta.texto}</a>}
+              {s.cta_secundario && (
+                <a class="btn-sec" href={s.cta_secundario.url}>
+                  {esTel(s.cta_secundario.url) && <Icono nombre="telefono" tam={18} />}
+                  {s.cta_secundario.texto}
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+        {lineas.length > 0 && (
+          <div class="consola" aria-label="Datos de contacto">
+            <p class="consola-barra" aria-hidden="true"><span /><span /><span /></p>
+            <dl class="consola-lineas">
+              {lineas.map((l) => (
+                <div>
+                  <dt>{l.clave}</dt>
+                  <dd>{l.url ? <a href={l.url}>{l.valor}</a> : l.valor}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+      </div>
+      {aparatos.length > 0 && (
+        <div class="hero-tira">
+          <ul class="contenedor hero-tira-lista">
+            {aparatos.map((a) => (
+              <li><span class="led" aria-hidden="true" />{a}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .hero { min-height: calc(100svh - var(--alto-cabecera) - 3.5rem); }
+  @media (min-width: 768px) { .hero { min-height: calc(100svh - var(--alto-cabecera)); } }
+  @media (min-width: 1024px) { .hero { min-height: 88svh; } }
+  .hero-velo {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--c-texto) 30%, transparent) 0%, transparent 35%, color-mix(in srgb, var(--c-texto) 85%, transparent) 100%),
+      linear-gradient(90deg, color-mix(in srgb, var(--c-texto) 95%, transparent) 0%, color-mix(in srgb, var(--c-texto) 80%, transparent) 50%, color-mix(in srgb, var(--c-texto) 35%, transparent) 100%);
+  }
+  .hero-puntos { width: 45%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%); mask-image: linear-gradient(90deg, transparent, #000 60%); opacity: .8; }
+  .hero-rejilla { display: grid; align-content: center; gap: 3rem; padding-block: 4rem; }
+  @media (min-width: 1024px) { .hero-rejilla { grid-template-columns: minmax(0, 1fr) 22rem; align-items: end; padding-block: 6rem 5rem; } }
+  @media (min-width: 1280px) { .hero-rejilla { grid-template-columns: minmax(0, 1fr) 25rem; } }
+  .hero-titulo { margin-top: 1.25rem; max-width: 14ch; font-size: clamp(2.6rem, 10.5vw, 6.75rem); line-height: .95; letter-spacing: -0.05em; }
+  .consola { display: none; border: 1px solid color-mix(in srgb, var(--c-primario) 40%, transparent); border-radius: var(--radio); background: color-mix(in srgb, var(--c-texto) 75%, transparent); backdrop-filter: blur(8px); font-family: var(--fuente-mono); font-size: .85rem; box-shadow: 0 0 40px color-mix(in srgb, var(--c-primario) 12%, transparent); }
+  @media (min-width: 1024px) { .consola { display: block; } }
+  .consola-barra { display: flex; gap: .4rem; padding: .7rem .9rem; border-bottom: 1px solid var(--linea-oscura); }
+  .consola-barra span { width: .6rem; height: .6rem; border-radius: 50%; background: var(--linea-oscura); }
+  .consola-barra span:first-child { background: var(--c-primario); }
+  .consola-lineas { display: grid; gap: .9rem; padding: 1.1rem 1.1rem 1.3rem; }
+  .consola-lineas dt { color: var(--c-primario); }
+  .consola-lineas dt::before { content: "> "; opacity: .7; }
+  .consola-lineas dd { margin-top: .15rem; line-height: 1.45; opacity: .9; }
+  .consola-lineas a { text-decoration: none; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.03em; }
+  .consola-lineas a:hover { color: var(--c-primario); }
+  .hero-tira { border-top: 1px solid var(--linea-oscura); background: color-mix(in srgb, var(--c-texto) 70%, transparent); }
+  .hero-tira-lista { display: flex; flex-wrap: wrap; gap: .4rem 2rem; padding-block: 1rem; font-family: var(--fuente-mono); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .hero-tira-lista li { display: inline-flex; align-items: center; gap: .55rem; }
+  .led { width: .45rem; height: .45rem; border-radius: 50%; background: var(--c-primario); box-shadow: 0 0 8px var(--c-primario); }
+</style>

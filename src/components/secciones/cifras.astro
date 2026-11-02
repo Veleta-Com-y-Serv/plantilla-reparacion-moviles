@@ -1,0 +1,44 @@
+---
+// Cifras: banda verde a todo el ancho. Titular corto y los números en monoespaciada enorme
+// (`items: [{titulo: "+300", texto}]`), en 2 columnas en móvil y 4 en escritorio, con filetes como un panel de
+// medida. **No se pinta si `items` está vacío.** No inventes cifras.
+import { seccion } from '../../data/site';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const cifras = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && cifras.length > 0 && (
+    <section id={id} class="banda-neon seccion">
+      <div class="contenedor">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        {s.titulo && <h2 class="cif-titulo">{s.titulo}</h2>}
+        <dl class="cif-rejilla">
+          {cifras.map((c) => (
+            <div class="cif">
+              <dt class="cif-texto">{c.texto}</dt>
+              <dd class="cif-num num">{c.titulo}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .cif-titulo { margin-top: .9rem; max-width: 22ch; font-size: clamp(1.75rem, 4.5vw, 3rem); }
+  .cif-rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 3rem; border-top: 2px solid currentColor; }
+  @media (min-width: 1024px) { .cif-rejilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .cif { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: .5rem; padding: 1.5rem 1rem 1.5rem 0; border-bottom: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+  .cif:nth-child(2n) { padding-left: 1rem; border-left: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+  @media (min-width: 1024px) {
+    .cif { padding: 2rem 1.5rem; border-bottom: 0; border-left: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+    .cif:nth-child(2n) { padding-left: 1.5rem; }
+    .cif:first-child { border-left: 0; padding-left: 0; }
+  }
+  .cif-num { font-size: clamp(2rem, 6.4vw, 4.25rem); line-height: 1; letter-spacing: -0.06em; overflow-wrap: break-word; min-width: 0; }
+  .cif-texto { font-family: var(--fuente-mono); font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+</style>

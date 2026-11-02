@@ -1,0 +1,61 @@
+---
+// Presupuesto: banda partida 50/50 a sangre. A la izquierda, `imagen` (el mostrador) hasta el borde de la ventana
+// con velo negro y, encima, el titular, `items: [{titulo, texto, icono}]` y la `nota` en un recuadro con borde verde.
+// A la derecha, mitad grafito con el formulario de presupuesto: nombre, teléfono, aparato (los `dispositivo` de
+// las reparaciones), marca y modelo, qué le pasa (los nombres de las reparaciones) y mensaje. `boton_formulario`.
+import { seccion } from '../../data/site';
+import Icono from '../ui/Icono.astro';
+import Imagen from '../ui/Imagen.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+const botonForm = (s?.boton_formulario as string) || s?.cta?.texto || undefined;
+---
+
+{
+  s && (
+    <section id={id} class="partida">
+      <div class="pres-lado banda-negra puntos relative isolate overflow-hidden">
+        {s.imagen && <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="absolute inset-0 -z-20 h-full w-full object-cover" />}
+        {s.imagen && <div class="pres-velo absolute inset-0 -z-10" aria-hidden="true" />}
+        <div class="partida-texto partida-texto--izq pres-texto">
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+          {items.length > 0 && (
+            <ul class="pres-items">
+              {items.map((it) => (
+                <li>
+                  <Icono nombre={it.icono} tam={22} class="mt-0.5 shrink-0 text-primario" />
+                  <div>
+                    <p class="font-bold">{it.titulo}</p>
+                    {it.texto && <p class="text-[.95rem] opacity-75">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.nota && <p class="pres-nota">{s.nota}</p>}
+        </div>
+      </div>
+      <div class="banda-grafito pres-form">
+        <div class="partida-texto partida-texto--der">
+          <FormularioContacto modelo="presupuesto" prefijo={`${id}-f`} boton={botonForm} />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .pres-velo { background: linear-gradient(180deg, color-mix(in srgb, var(--c-texto) 55%, transparent), color-mix(in srgb, var(--c-texto) 92%, transparent) 70%); }
+  .pres-texto { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100%; }
+  @media (min-width: 1024px) { .pres-texto { padding-top: 14rem; } }
+  .pres-items { display: grid; gap: 1.1rem; margin-top: 2.25rem; }
+  @media (min-width: 640px) { .pres-items { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+  .pres-items li { display: flex; gap: .8rem; }
+  .pres-nota { margin-top: 2.25rem; padding: .9rem 1rem; font-family: var(--fuente-mono); font-size: .85rem; line-height: 1.5; border: 1px solid color-mix(in srgb, var(--c-primario) 55%, transparent); border-left-width: 3px; border-radius: var(--radio); background: color-mix(in srgb, var(--c-texto) 60%, transparent); }
+  .pres-form { display: grid; align-content: center; }
+</style>

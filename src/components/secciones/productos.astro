@@ -1,0 +1,60 @@
+---
+// Tienda: banda clara a todo el ancho. Titular y rejilla de fichas (1 columna en móvil, 2 en tableta, 4 en
+// escritorio) con `productos: [{nombre, texto, categoria, precio, estado, imagen}]`: foto cuadrada sobre panel con
+// el `estado` en un chip negro y verde, `categoria` en monoespaciada, nombre, texto y precio. Sin foto, el dibujo de
+// relleno; sin precio, no sale precio. `cta` opcional al pie. Sin productos, solo el titular.
+import { seccion } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const productos = s ? s.productos : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda-clara seccion">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {productos.length > 0 && (
+          <ul class="prod-rejilla">
+            {productos.map((p) => (
+              <li class="prod">
+                <div class="prod-foto">
+                  <Imagen src={p.imagen || '/placeholders/producto.svg'} alt={altFicha(p)} ancho={800} alto={800} class="h-full w-full object-cover" />
+                  {p.estado && <span class="chip prod-estado">{p.estado}</span>}
+                </div>
+                <div class="prod-cuerpo">
+                  {p.categoria && <p class="prod-categoria">{p.categoria}</p>}
+                  <h3 class="prod-nombre">{p.nombre}</h3>
+                  {p.texto && <p class="prod-texto">{p.texto}</p>}
+                  {p.precio && <p class="prod-precio num">{p.precio}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.cta && <p class="mt-10"><a class="btn btn-negro" href={s.cta.url}>{s.cta.texto}</a></p>}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .prod-rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem .75rem; }
+  @media (min-width: 640px) { .prod-rejilla { gap: 2.5rem 1.5rem; } }
+  @media (max-width: 639px) { .prod-nombre { font-size: 1.05rem; } .prod-texto { font-size: .85rem; } .prod-precio { font-size: 1.2rem; } .prod-estado { top: .5rem; left: .5rem; font-size: .62rem; } }
+  @media (min-width: 1024px) { .prod-rejilla { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .prod { display: flex; flex-direction: column; }
+  .prod-foto { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radio); background: var(--panel); border: 1px solid var(--linea); }
+  .prod-foto :global(img) { transition: transform .4s ease; }
+  .prod:hover .prod-foto :global(img) { transform: scale(1.04); }
+  .prod-estado { position: absolute; top: .75rem; left: .75rem; background: var(--c-texto); color: var(--c-primario); border-color: var(--c-texto); }
+  .prod-cuerpo { display: flex; flex: 1; flex-direction: column; padding-top: 1.1rem; }
+  .prod-categoria { font-family: var(--fuente-mono); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--c-acento); }
+  .prod-nombre { margin-top: .35rem; font-size: 1.3rem; letter-spacing: -0.03em; line-height: 1.15; }
+  .prod-texto { margin-top: .4rem; font-size: .95rem; opacity: .75; }
+  .prod-precio { margin-top: auto; padding-top: 1rem; font-size: 1.5rem; }
+</style>

@@ -1,0 +1,173 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Una sola página: el menú apunta a anclas (#id-de-sección).
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas planas: nunca una lista dentro de un elemento de lista. Precios y cifras, siempre entre comillas.
+nombre: Circuito Elx
+eslogan: Reparación de móviles, tablets, portátiles y consolas en Elche. Diagnóstico gratis y presupuesto cerrado.
+sector: reparacion-moviles
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = inicial en chip verde + nombre.
+colores:
+  primario: "#3dff8f"   # verde neón (botones, bandas verdes, cursor, precios sobre negro)
+  acento: "#0b7a3e"     # verde oscuro (textos y detalles verdes sobre fondo claro, foco)
+  fondo: "#f3f4f5"      # gris muy claro
+  texto: "#0c0e10"      # casi negro: la letra y también las bandas oscuras
+contacto:
+  telefono: "965 40 18 72"
+  email: hola@circuitoelx.es
+  direccion: Calle Reina Victoria 27, 03201 Elche (Alicante)
+  horario: "Lunes a viernes, de 10:00 a 14:00 y de 17:00 a 20:30. Sábados, de 10:00 a 14:00."
+  whatsapp: "+34 622 41 90 37"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Reparaciones, url: "/#reparaciones" }
+  - { texto: Cómo trabajamos, url: "/#proceso" }
+  - { texto: Tienda, url: "/#productos" }
+  - { texto: Opiniones, url: "/#opiniones" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Pedir presupuesto, url: "/#presupuesto" }
+seo:
+  titulo: Circuito Elx · Reparación de móviles e informática en Elche
+  descripcion: "Reparamos pantallas, baterías y conectores de móviles, tablets, portátiles y consolas en Elche. Diagnóstico gratis y muchas reparaciones en el día."
+  tipo: ElectronicsStore
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Servicio técnico en Elche
+    titulo: Tu móvil, arreglado hoy mismo
+    texto: "Pantallas, baterías, conectores y placas de móviles, tablets, portátiles y consolas. Lo miramos gratis delante de ti y te damos el precio cerrado antes de tocar nada."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Pedir presupuesto, url: "/#presupuesto" }
+    cta_secundario: { texto: Llamar a la tienda, url: "tel:+34965401872" }
+
+  reparaciones:
+    activa: true
+    antetitulo: Reparaciones
+    titulo: Lo que arreglamos cada día
+    texto: "Precios orientativos con IVA. Te damos el precio exacto de tu modelo antes de empezar."
+    nota: "Pieza, mano de obra y garantía incluidas. Si no se puede reparar, no pagas nada."
+    cta: { texto: Pide precio para tu modelo, url: "/#presupuesto" }
+    reparaciones:
+      - { nombre: Cambio de pantalla, texto: "Cristal y pantalla completos con marco y prueba táctil.", precio: "desde 49 €", tiempo: "En 1 hora", dispositivo: Móvil }
+      - { nombre: Cambio de batería, texto: "Batería nueva con la capacidad original y calibrado.", precio: "desde 39 €", tiempo: "En 30 minutos", dispositivo: Móvil }
+      - { nombre: Conector de carga, texto: "Limpieza o cambio del puerto de carga y del micrófono.", precio: "desde 35 €", tiempo: "En 1 hora", dispositivo: Móvil }
+      - { nombre: Mojado o caída al agua, texto: "Limpieza por ultrasonidos de la placa y diagnóstico.", precio: "desde 45 €", tiempo: "24 a 48 horas", dispositivo: Móvil }
+      - { nombre: Pantalla de tablet, texto: "Digitalizador o pantalla completa según el modelo.", precio: "desde 69 €", tiempo: "En el día", dispositivo: Tablet }
+      - { nombre: Batería de tablet, texto: "Cambio con adhesivo nuevo y prueba de carga.", precio: "desde 55 €", tiempo: "En el día", dispositivo: Tablet }
+      - { nombre: Portátil lento, texto: "Disco SSD, ampliación de memoria y limpieza del sistema.", precio: "desde 59 €", tiempo: "24 horas", dispositivo: Portátil }
+      - { nombre: Pantalla o teclado de portátil, texto: "Panel o teclado nuevo compatible con tu modelo.", precio: "desde 89 €", tiempo: "48 horas", dispositivo: Portátil }
+      - { nombre: Limpieza y pasta térmica, texto: "Para el ruido y el calor: ventiladores limpios y pasta nueva.", precio: "desde 35 €", tiempo: "En el día", dispositivo: Portátil }
+      - { nombre: Mando que deriva, texto: "Cambio de joysticks y botones de mandos de consola.", precio: "desde 25 €", tiempo: "En 1 hora", dispositivo: Consola }
+      - { nombre: Puerto HDMI de consola, texto: "Microsoldadura del conector de vídeo.", precio: "desde 79 €", tiempo: "48 horas", dispositivo: Consola }
+      - { nombre: Consola que se calienta, texto: "Limpieza interna, pasta térmica y revisión del ventilador.", precio: "desde 45 €", tiempo: "24 horas", dispositivo: Consola }
+
+  marcas:
+    activa: true
+    antetitulo: Marcas
+    titulo: Reparamos todas las marcas
+    texto: "Con piezas de calidad original y las herramientas de cada fabricante."
+    items:
+      - { titulo: Apple }
+      - { titulo: Samsung }
+      - { titulo: Xiaomi }
+      - { titulo: Oppo }
+      - { titulo: Motorola }
+      - { titulo: Google Pixel }
+      - { titulo: Huawei }
+      - { titulo: Realme }
+      - { titulo: Lenovo }
+      - { titulo: HP }
+      - { titulo: Asus }
+      - { titulo: Nintendo }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo trabajamos
+    titulo: Tres pasos y sin sorpresas
+    texto: "Nunca reparamos nada que no hayas aprobado antes."
+    items:
+      - { titulo: Diagnóstico, texto: "Miramos el aparato delante de ti, gratis y sin compromiso. En cinco minutos sabes qué le pasa.", icono: lupa }
+      - { titulo: Presupuesto, texto: "Te damos el precio cerrado y el tiempo. Si te parece bien, empezamos; si no, te lo llevas.", icono: euro }
+      - { titulo: Reparación, texto: "Lo arreglamos con piezas de calidad, lo probamos contigo y te lo llevas con garantía.", icono: herramienta }
+    galeria:
+      - /fotos/proceso-1.jpg
+      - /fotos/proceso-2.jpg
+      - /fotos/proceso-3.jpg
+
+  garantias:
+    activa: true
+    antetitulo: Garantías
+    titulo: Lo que te prometemos
+    texto: "Somos una tienda de barrio con un banco de trabajo de laboratorio. Reparamos aquí, no enviamos tu móvil a ninguna parte."
+    imagen: /fotos/garantias.jpg
+    items:
+      - { titulo: Seis meses de garantía, texto: "En todas las reparaciones, por escrito en la factura.", icono: escudo }
+      - { titulo: "Tus datos, a salvo", texto: "No borramos nada y no miramos tus fotos ni tus mensajes.", icono: candado }
+      - { titulo: Sin arreglo no pagas, texto: "Si no se puede reparar, el diagnóstico te sale gratis.", icono: check }
+      - { titulo: Móvil de préstamo, texto: "Para reparaciones de más de un día, te dejamos uno.", icono: movil }
+
+  productos:
+    activa: true
+    antetitulo: Tienda
+    titulo: Fundas, accesorios y reacondicionados
+    texto: "Móviles y portátiles revisados en nuestro taller, con garantía, y todo lo que necesitas para protegerlos."
+    productos:
+      - { nombre: iPhone 13 reacondicionado, texto: "128 GB, batería nueva y revisión de 30 puntos.", categoria: Reacondicionados, precio: "389 €", estado: Reacondicionado, imagen: /fotos/producto-1.jpg }
+      - { nombre: Portátil de 14 pulgadas, texto: "Procesador i5, 16 GB de memoria y disco SSD de 512 GB.", categoria: Reacondicionados, precio: "329 €", estado: Reacondicionado, imagen: /fotos/producto-2.jpg }
+      - { nombre: Funda antigolpes y cristal templado, texto: "Para tu modelo, colocados en la tienda.", categoria: Fundas, precio: "desde 19 €", estado: Nuevo, imagen: /fotos/producto-3.jpg }
+      - { nombre: Cargador rápido con cable, texto: "Cargador de 30 W y cable trenzado de dos metros.", categoria: Accesorios, precio: "24,90 €", estado: Nuevo, imagen: /fotos/producto-4.jpg }
+
+  cifras:
+    activa: true
+    antetitulo: En números
+    titulo: Una tienda de barrio con banco de laboratorio
+    items:
+      - { titulo: "12", texto: años reparando en Elche }
+      - { titulo: "+18.000", texto: aparatos reparados }
+      - { titulo: "70 %", texto: listos en el mismo día }
+      - { titulo: "6 meses", texto: de garantía por escrito }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen al recoger el móvil
+    testimonios:
+      - { texto: "Se me cayó el móvil el sábado por la mañana y a mediodía ya lo tenía con la pantalla nueva. Me dijeron el precio antes y no cambió ni un euro.", autor: Nuria P., nota: "Cambio de pantalla, Altabix" }
+      - { texto: "El portátil de mi hijo tardaba cinco minutos en arrancar. Le pusieron un disco nuevo y parece otro. Me explicaron todo sin tecnicismos.", autor: Javier S., nota: "Portátil lento, Carrús" }
+      - { texto: "Me arreglaron los dos mandos de la consola en una hora mientras tomaba un café. Precio justo y muy majos.", autor: Marta G., nota: "Mandos de consola, El Pla" }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que nos preguntáis en el mostrador
+    texto: "¿No encuentras la tuya? Escríbenos por WhatsApp y te contestamos enseguida."
+    preguntas:
+      - { pregunta: "¿Cuánto tarda un cambio de pantalla?", respuesta: "En la mayoría de los móviles, alrededor de una hora. Si tenemos que pedir la pieza, te decimos el día exacto al darte el presupuesto." }
+      - { pregunta: "¿Voy a perder mis fotos y mis datos?", respuesta: "No. Las reparaciones de pantalla, batería o conector no tocan tus datos. Si hay que restaurar el sistema, te lo decimos antes y te ayudamos con la copia." }
+      - { pregunta: "¿Cuánto cuesta el diagnóstico?", respuesta: "Nada. Miramos el aparato gratis y sin compromiso. Si decides no repararlo, te lo llevas tal cual." }
+      - { pregunta: "¿Qué garantía tienen las reparaciones?", respuesta: "Seis meses en la pieza y en la mano de obra, por escrito en la factura. Si falla algo, vuelve y lo miramos." }
+      - { pregunta: "¿Reparáis móviles que se han mojado?", respuesta: "Sí. Apágalo, no lo cargues y tráelo cuanto antes. Limpiamos la placa por ultrasonidos y te decimos si tiene arreglo." }
+
+  presupuesto:
+    activa: true
+    antetitulo: Presupuesto
+    titulo: Dinos qué le pasa y te damos el precio
+    texto: "Elige el aparato, cuéntanos la avería y te contestamos con el precio y el tiempo de reparación."
+    imagen: /fotos/presupuesto.jpg
+    nota: "Sin compromiso. Te contestamos en menos de dos horas en horario de tienda."
+    boton_formulario: Pedir presupuesto
+    items:
+      - { titulo: Sin cita previa, texto: "Pásate por la tienda cuando quieras dentro del horario.", icono: reloj }
+      - { titulo: Respuesta rápida, texto: "Te escribimos por WhatsApp o te llamamos, como prefieras.", icono: whatsapp }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Pásate por la tienda
+    texto: "En el centro de Elche, a dos minutos del Mercado Central. Si no puedes venir, te recogemos el portátil en casa."
+    imagen: /fotos/contacto.jpg

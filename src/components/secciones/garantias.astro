@@ -1,0 +1,65 @@
+---
+// Garantías: banda grafito partida 50/50 a sangre. A la izquierda, `imagen` (el banco de trabajo) hasta el borde de
+// la ventana con un marco de esquinas verdes como el visor de una cámara; a la derecha, titular, `texto` y
+// `items: [{titulo, texto, icono}]` en rejilla de 2×2 con iconos en chip. Sin foto, el texto ocupa todo el ancho.
+import { seccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Icono from '../ui/Icono.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda-grafito">
+      <div class:list={['partida', s.imagen ? 'partida--md' : 'gar--sola']}>
+        {s.imagen && (
+          <div class="partida-foto gar-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1200} />
+            <span class="gar-visor" aria-hidden="true" />
+          </div>
+        )}
+        <div class:list={['partida-texto', s.imagen ? 'partida-texto--der' : 'contenedor']}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+          {items.length > 0 && (
+            <ul class="gar-items">
+              {items.map((it) => (
+                <li>
+                  <span class="gar-icono"><Icono nombre={it.icono} tam={22} /></span>
+                  <h3 class="gar-titulo">{it.titulo}</h3>
+                  {it.texto && <p class="mt-1 text-[.97rem] opacity-75">{it.texto}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .gar--sola { grid-template-columns: 1fr !important; }
+  .gar-foto { min-height: 22rem; }
+  @media (min-width: 768px) { .gar-foto { min-height: 36rem; } }
+  .gar-visor { position: absolute; inset: 1.25rem; pointer-events: none;
+    background:
+      linear-gradient(var(--c-primario), var(--c-primario)) top left / 2rem 2px no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) top left / 2px 2rem no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) top right / 2rem 2px no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) top right / 2px 2rem no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) bottom left / 2rem 2px no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) bottom left / 2px 2rem no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) bottom right / 2rem 2px no-repeat,
+      linear-gradient(var(--c-primario), var(--c-primario)) bottom right / 2px 2rem no-repeat; }
+  .gar-items { display: grid; gap: 0; margin-top: 2.75rem; border-top: 1px solid var(--linea-oscura); }
+  @media (min-width: 640px) { .gar-items { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; } }
+  .gar-items li { padding-block: 1.6rem; border-bottom: 1px solid var(--linea-oscura); }
+  .gar-icono { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid color-mix(in srgb, var(--c-primario) 55%, transparent); border-radius: var(--radio); color: var(--c-primario); }
+  .gar-titulo { margin-top: 1rem; font-size: 1.35rem; letter-spacing: -0.03em; line-height: 1.15; }
+</style>
