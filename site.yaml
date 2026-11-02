@@ -53,16 +53,66 @@ secciones:
     nota: "Pieza, mano de obra y garantía incluidas. Si no se puede reparar, no pagas nada."
     cta: { texto: Pide precio para tu modelo, url: "/#presupuesto" }
     reparaciones:
-      - { nombre: Cambio de pantalla, texto: "Cristal y pantalla completos con marco y prueba táctil.", precio: "desde 49 €", tiempo: "En 1 hora", dispositivo: Móvil }
-      - { nombre: Cambio de batería, texto: "Batería nueva con la capacidad original y calibrado.", precio: "desde 39 €", tiempo: "En 30 minutos", dispositivo: Móvil }
+      - nombre: Cambio de pantalla
+        texto: "Cristal y pantalla completos con marco y prueba táctil."
+        precio: "desde 49 €"
+        tiempo: "En 1 hora"
+        dispositivo: Móvil
+        detalle: |
+          Cambiamos el cristal y la pantalla completa de tu móvil con su marco, y probamos el táctil, el brillo y los sensores antes de entregártelo. Antes de abrir nada miramos el aparato delante de ti y te decimos si basta con el cristal o si hace falta cambiar el módulo entero, que es lo habitual cuando se ven manchas, líneas o zonas sin respuesta.
+
+          Trabajamos con piezas de calidad y herramientas específicas para cada fabricante, así que el móvil queda sellado y cerrado como salió de fábrica. Te explicamos qué opciones de pieza hay para tu modelo y qué diferencia hay entre ellas, y eres tú quien decide.
+
+          Lo normal es que lo tengas listo mientras das una vuelta por el barrio. Si hay que pedir la pieza, te damos el día exacto al presupuestar. No tocamos tus datos: no hace falta que desbloquees nada más allá de comprobar que todo responde. Te lo llevas con garantía por escrito en la factura y, si algo falla, vuelves y lo miramos sin discusión.
+      - nombre: Cambio de batería
+        texto: "Batería nueva con la capacidad original y calibrado."
+        precio: "desde 39 €"
+        tiempo: "En 30 minutos"
+        dispositivo: Móvil
+        detalle: |
+          Si tu móvil se apaga a mitad de día, se calienta al cargar o no te llega a la noche, lo más probable es que la batería esté al final de su vida. Es una de las reparaciones más agradecidas: el móvil vuelve a comportarse como el primer día sin cambiar de aparato.
+
+          Montamos una batería nueva con la capacidad original de tu modelo, sustituimos el adhesivo y calibramos el indicador de carga para que el porcentaje sea fiable desde el primer momento. Revisamos también que la tapa o el marco no estén hinchados, porque una batería muy vencida puede deformar el aparato.
+
+          Es un trabajo rápido: te lo hacemos en el mostrador mientras esperas, con un café de por medio. Te enseñamos la prueba de carga y descarga antes de cobrarte y te decimos cómo cuidar la batería nueva para que dure. Todo con la misma garantía por escrito que el resto de reparaciones y con el precio cerrado desde el principio.
       - { nombre: Conector de carga, texto: "Limpieza o cambio del puerto de carga y del micrófono.", precio: "desde 35 €", tiempo: "En 1 hora", dispositivo: Móvil }
-      - { nombre: Mojado o caída al agua, texto: "Limpieza por ultrasonidos de la placa y diagnóstico.", precio: "desde 45 €", tiempo: "24 a 48 horas", dispositivo: Móvil }
+      - nombre: Mojado o caída al agua
+        texto: "Limpieza por ultrasonidos de la placa y diagnóstico."
+        precio: "desde 45 €"
+        tiempo: "24 a 48 horas"
+        dispositivo: Móvil
+        detalle: |
+          Un móvil que ha caído al agua tiene arreglo muchas veces, pero el tiempo cuenta. Lo primero es apagarlo, no cargarlo y traerlo cuanto antes, porque la corrosión empieza a comerse la placa en cuestión de horas y cada día que pasa reduce las posibilidades.
+
+          Lo abrimos, desconectamos la batería y limpiamos la placa por ultrasonidos con líquido especial, que llega a los rincones donde el agua deja residuos. Después secamos con cuidado, revisamos al microscopio los componentes dañados y sustituimos los que no se pueden recuperar. Al final comprobamos pantalla, carga, sonido, cámaras y conectividad.
+
+          Te contamos con honestidad qué tiene arreglo y qué no. El diagnóstico no te cuesta nada y, si el móvil no se puede reparar, no pagas la reparación. Es un trabajo más lento que un cambio de pantalla porque hay que dejar que la placa seque bien, así que te avisamos por WhatsApp en cuanto tengamos novedades y te ayudamos a salvar la información cuando sea posible.
       - { nombre: Pantalla de tablet, texto: "Digitalizador o pantalla completa según el modelo.", precio: "desde 69 €", tiempo: "En el día", dispositivo: Tablet }
       - { nombre: Batería de tablet, texto: "Cambio con adhesivo nuevo y prueba de carga.", precio: "desde 55 €", tiempo: "En el día", dispositivo: Tablet }
-      - { nombre: Portátil lento, texto: "Disco SSD, ampliación de memoria y limpieza del sistema.", precio: "desde 59 €", tiempo: "24 horas", dispositivo: Portátil }
+      - nombre: Portátil lento
+        texto: "Disco SSD, ampliación de memoria y limpieza del sistema."
+        precio: "desde 59 €"
+        tiempo: "24 horas"
+        dispositivo: Portátil
+        detalle: |
+          Cuando un portátil tarda minutos en arrancar o se queda colgado al abrir el navegador, casi nunca hace falta comprar uno nuevo. Casi siempre el problema es un disco duro antiguo y poca memoria, y ambas cosas se pueden mejorar por una fracción de lo que cuesta un equipo nuevo.
+
+          Empezamos con un diagnóstico gratuito para ver el estado real del disco, la memoria y el sistema. Después te proponemos lo que de verdad merece la pena: cambiar el disco por uno SSD, ampliar la memoria si el modelo lo permite, o limpiar el sistema de programas que arrancan sin que lo sepas. Copiamos tu información al disco nuevo para que lo encuentres todo como lo dejaste.
+
+          Aprovechamos para limpiar el polvo por dentro y revisar el ventilador. Lo normal es devolvértelo en un día. Te explicamos sin tecnicismos qué hemos hecho y por qué, y te lo llevas con garantía por escrito. Si lo mejor es no tocar nada, también te lo decimos.
       - { nombre: Pantalla o teclado de portátil, texto: "Panel o teclado nuevo compatible con tu modelo.", precio: "desde 89 €", tiempo: "48 horas", dispositivo: Portátil }
       - { nombre: Limpieza y pasta térmica, texto: "Para el ruido y el calor: ventiladores limpios y pasta nueva.", precio: "desde 35 €", tiempo: "En el día", dispositivo: Portátil }
-      - { nombre: Mando que deriva, texto: "Cambio de joysticks y botones de mandos de consola.", precio: "desde 25 €", tiempo: "En 1 hora", dispositivo: Consola }
+      - nombre: Mando que deriva
+        texto: "Cambio de joysticks y botones de mandos de consola."
+        precio: "desde 25 €"
+        tiempo: "En 1 hora"
+        dispositivo: Consola
+        detalle: |
+          Si tu personaje avanza solo o la cámara se mueve sin que toques la palanca, tu mando tiene lo que se conoce como deriva. Es un desgaste muy común en los joysticks y se arregla sin necesidad de comprar un mando nuevo.
+
+          Abrimos el mando, comprobamos qué joystick está fallando y lo sustituimos por una pieza nueva, soldándola con cuidado para que quede firme. Aprovechamos para limpiar los contactos, revisar los botones y asegurarnos de que el gatillo responde igual que el primer día. Calibramos el mando y lo probamos en una consola de la tienda antes de dártelo.
+
+          Es una reparación de las que se hacen en el mostrador: te lo tenemos listo mientras tomas un café por la zona. Funciona con los mandos de las consolas más habituales y te decimos antes si compensa arreglarlo o si el mando tiene otros daños. Como siempre, precio cerrado antes de empezar y garantía por escrito en la factura.
       - { nombre: Puerto HDMI de consola, texto: "Microsoldadura del conector de vídeo.", precio: "desde 79 €", tiempo: "48 horas", dispositivo: Consola }
       - { nombre: Consola que se calienta, texto: "Limpieza interna, pasta térmica y revisión del ventilador.", precio: "desde 45 €", tiempo: "24 horas", dispositivo: Consola }
 

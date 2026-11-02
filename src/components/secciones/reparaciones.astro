@@ -3,8 +3,10 @@
 // `nota` y `cta` a la derecha) y, debajo, una tabla técnica en dos columnas (escritorio ancho) con
 // `reparaciones: [{nombre, texto, precio, tiempo, dispositivo}]`: etiqueta del aparato con su icono, nombre,
 // texto, tiempo y precio en monoespaciada. Si hay más de un aparato, filtros sin JavaScript (radios + :has).
-// Sin precio no sale precio; sin tiempo no sale tiempo; sin reparaciones solo se pinta el titular.
+// Las reparaciones con `detalle` tienen página propia (/reparaciones/<slug>/): el nombre es un enlace y la fila entera
+// es clicable. Sin precio no sale precio; sin tiempo no sale tiempo; sin reparaciones solo se pinta el titular.
 import { seccion, clave } from '../../data/site';
+import { enlaceDe } from '../../lib/paginas';
 import Icono from '../ui/Icono.astro';
 import Titular from '../ui/Titular.astro';
 interface Props { id: string }
@@ -77,8 +79,9 @@ const css = conFiltros
                   )}
                 </div>
                 <div class="rep-cuerpo">
-                  <h3 class="rep-nombre">{r.nombre}</h3>
+                  <h3 class="rep-nombre">{enlaceDe(r) ? <a href={enlaceDe(r)} class="rep-enlace">{r.nombre}</a> : r.nombre}</h3>
                   {r.texto && <p class="rep-texto">{r.texto}</p>}
+                  {enlaceDe(r) && <span class="rep-ver" aria-hidden="true">Ver más <Icono nombre="flecha" tam={14} /></span>}
                 </div>
                 {r.precio && <p class="rep-precio num">{r.precio}</p>}
               </li>
@@ -107,6 +110,11 @@ const css = conFiltros
   .rep-fila:hover { background: var(--panel); }
   .rep-fila:hover::before { background: var(--c-primario); }
   .rep-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+  .rep-enlace { color: inherit; text-decoration: none; }
+  .rep-enlace::after { content: ""; position: absolute; inset: 0; }
+  .rep-enlace:focus-visible { outline: none; }
+  .rep-fila:has(.rep-enlace:focus-visible) { outline: 2px solid var(--c-acento); outline-offset: 2px; }
+  .rep-ver { display: inline-flex; align-items: center; gap: .3rem; margin-top: .5rem; font-family: var(--fuente-mono); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--c-acento); }
   .rep-aparato { color: var(--c-acento); }
   .rep-tiempo { display: inline-flex; align-items: center; gap: .35rem; font-family: var(--fuente-mono); font-size: .78rem; opacity: .75; }
   .rep-nombre { font-size: clamp(1.25rem, 2.2vw, 1.5rem); letter-spacing: -0.03em; line-height: 1.15; }

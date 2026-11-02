@@ -55,3 +55,8 @@ lo que lee quien (persona o agente) rediseñe la plantilla.
   legible, sin logotipos ni personas.
 - **Qué no hacer**: tarjetas blancas flotando en una caja estrecha; naranja, franjas diagonales o chaflanes (son de
   `taller-mecanico`); logotipos de marcas; precios o cifras inventados en los componentes.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.
